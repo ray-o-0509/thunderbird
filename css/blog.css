@@ -1,0 +1,111 @@
+body{
+  /* text-align: center; */
+  margin: 0;
+  background: #25252E;
+}
+.titlePicture{
+  background-color: hsl(0,0%,80%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#blogUl1,#blogUl2,#blogUl3,#blogUl4,#blogUl5{
+  display: none;
+}
+.blogView{
+  color: #323232;
+  border-left: solid 6px rgb(22,97,117);/*左側の線*/
+  border-bottom: solid 2px #dadada;/*下に灰色線*/
+  background: white;
+  margin-bottom: 5px;/*下のバーとの余白*/
+  line-height: 1.5;
+  padding: 0.5em;
+  margin-left: 10%;
+  margin-right: 10%;
+  list-style-type: none!important;/*ポチ消す*/
+  font-weight: bold;
+  height: 11vw;
+  /* overflow: scroll; */
+}
+.viewBlogPicture{
+  width: 15%;
+  height: 10vw;
+  object-fit: cover;
+  float: left;
+}
+.viewBlogTitle{
+  margin-left: 18%;
+  font-size: 1.3vw;
+  text-decoration: underline;
+}
+.viewBlogTitle:hover
+{
+  color: rgb(22,97,117);
+  text-decoration: none;
+}
+.viewBlogContents{
+  margin-left: 18%;
+  margin-right: 5%;
+  font-size: 1.3vw;
+  margin-top: 1vw;
+}
+.blogTag{
+  color: rgb(22,97,117);
+  font-size: 1.2vw;
+  margin-left: 18%;
+}
+.blogTag:hover{
+  color: black;
+}
+.selectTag{
+  color: rgb(22,97,117);
+}
+.selectTag:hover{
+  color: black;
+}
+#selectTags{
+  margin-left: 10%;
+  margin-bottom: 2%;
+  font-size: 1.5vw;
+}
+.scrollRange{
+  width: 20%;
+  height: 800px;
+  margin-left: 3%;
+  position: relative;
+  /* margin-top: 20px; */
+  /* background-color: red; */
+  float: left;
+  /* z-index: -100; */
+
+    line-height: 20%;
+}
+.blogSecion{
+    background: hsl(0, 1%, 96%);
+    padding-top: 5%;
+    z-index: -1000;
+}
+.outline_back {
+    width: 110%;
+    height: 50vh;
+    /* position: absolute; */
+    border-top: solid 10px #FF857A;
+    /* top: 2500px; */
+    margin-top: -4%;
+    margin-left: -10%;
+    background-color: #25252E;
+    transform: skew(0deg, -5deg);
+    text-align: center;
+    /* overflow: hidden; */
+    z-index: -10;
+}
+.outline_back_line{
+  margin-top: -16%;
+}
+
+
+.blog-beta-content{
+  font-size: 1.4vw;
+  margin-top: 3vh;
+  text-align: center;
+}

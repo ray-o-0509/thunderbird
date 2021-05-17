@@ -1,0 +1,27 @@
+body{
+  background: hsl(0, 1%, 96%);
+}
+
+.blogTopImage{
+  width: 100%;
+}
+
+.articleBody{
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 10%;
+}
+.title{
+  font-size: 2vw;
+  color: black;
+}
+.blogTag_article{
+  font-size: 1.8vw;
+  color: rgb(22,97,117);
+}
+
+.article_article{
+  font-size: 1.3vw;
+  color: black;
+  font-weight: 300;
+}

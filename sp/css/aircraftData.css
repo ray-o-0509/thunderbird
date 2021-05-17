@@ -1,0 +1,61 @@
+.titlePicture{
+  background-color: hsl(0,0%,80%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body{
+  background: #25252E;
+}
+
+.aircraftName{
+  color: #25252E;
+  font-size: 60px;
+  margin-left: 10%;
+  /* background: linear-gradient(transparent 50%, #FF857A 50%); */
+  position: relative;
+	padding: 0.3em;
+
+}
+.aircraftName:after {
+  content: '';
+  position: absolute;
+  left: 0;
+    bottom: 0;
+  width: 87%;
+    height: 7px;
+    background: repeating-linear-gradient(-45deg, #FF857A, #FF857A 2px, #F5F5FF 2px, #F5F5FF 4px);
+  }
+
+.aircraftContents{
+  color: #25252E;
+  margin-top: 5%;
+  font-size: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.slider{
+  margin-bottom: 700px;
+
+}
+.outline_back_line{
+  margin-top: 46%;
+}
+
+.outline_back {
+    width: 110%;
+    height: 700px;
+    /* position: absolute; */
+    border-top: solid 10px #FF857A;
+    /* top: 2500px; */
+    margin-top: -30%;
+    margin-left: -10%;
+    background-color: #25252E;
+    transform: skew(0deg, -5deg);
+    text-align: center;
+    overflow: hidden;
+    z-index: -10;
+}
+

@@ -1,0 +1,85 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>孫正義育英財団 Thunderbirds</title>
+
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>
+		<link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
+		<link rel="icon" href="img/fabicon.ico">
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+	<script type="text/javascript">
+	    jQuery(document).ready(function($){
+				$('.slider').slick();
+	    });
+	</script>
+	<script type="text/javascript" src="js/aircraftData.js"></script>
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/aircraftData.css" rel="stylesheet">
+</head>
+<body>
+		<script type="text/javascript">
+			if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+			}else{
+				// PC用のページにリダイレクトする
+				location.href = 'https://o-ray.github.io/thunderbird/aircraftData.html';
+			}
+		</script>
+		<img src="http://drive.google.com/uc?export=view&id=1wDILssMikBwXfstIp-nz2bhPWFRVIJIj" class="titlePicture">
+		<!-- ↓↓↓メニュー↓↓↓ -->
+		<div id="menuButton" touchstart="menuTouch()">
+			<div class="menuBer" id="menuBer0" touchstart="menuTouch()"></div>
+			<div class="menuBer" id="menuBer1" touchstart="menuTouch()"></div>
+			<div class="menuBer" id="menuBer2" touchstart="menuTouch()"></div>
+		</div>
+		<div class="menuDiv">
+			<br><br><br><br>
+			<h1 style="color: #FF857A;font-size: 90px;padding: 0 0;/*上下の余白*/border-top: solid 7px #FF857A;/*上線*/border-bottom: solid 7px #FF857A;/*下線*/" class="menuMessage">メニュー</h1><br>
+			<br><hr><br>
+			<a href="index.html" class="menuMessage">トップ</a>
+			<br><hr><br>
+			<a href="team.html" class="menuMessage">チーム概要</a>
+			<br><hr><br>
+			<a class="menuMessage" style='font-size: 50px;'>機体データ</a>
+			<p style="color: white;font-size: 30px;">COMING SOON</p>
+			<br><hr><br>
+			<a href="blog.html" class="menuMessage">ブログ</a>
+			<br><hr><br>
+			<a class="menuMessage" onclick="outlineScroll()">問い合わせ</a>
+			<br><hr><br>
+		</div>
+	<!-- ↑↑↑メニュー↑↑↑ -->
+<!--
+
+		<section style="background-color: hsl(0, 1%, 96%); padding-top: 10%;">
+			<p class="aircraftName">Thunderbird</p>
+			<p class="aircraftContents">　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。。　ここに内容を入れていきます。　ここは１００字分のスペースを使用しています。</p><br><br><br>
+			<div class="slider" style="max-width: 90%;margin: auto;">
+				<img src="img/airplain.jpeg" height="800px" alt="">
+				<img src="img/airplain1.jpeg" height="800px" alt="">
+				<img src="img/airplain.jpeg" height="800px" alt="">
+				<img src="img/airplain1.jpeg" height="800px" alt="">
+			</div><br>
+			<div class="outline_back_line"></div>
+		</section>
+
+
+
+
+			<div class="outline_back">
+				<p class="outlineTitleJapanese">お問い合わせ</p><br>
+			<div style="text-align: left;position: absolute;left: 0px;top: 220px;transform: skew(0deg, 5deg);width: 100%;height: 300px;">
+					<p class="outlineContents">Email:  info@masason-thunderbirds.org<br>本プロジェクトに関するお問い合わせ、取材のご依頼、応援メッセージなどは上記のメールアドレスまでご連絡ください。<br>数日以内に担当者が確認の上、ご返答差し上げます。<br><br><br>公益財団法人 孫正義育英財団が運営する公式サイトではありません。孫正義育英財団生個人の取り組みとして、財団生が運営するサイトです。</p><br>
+					<a target="_blank" href="https://www.facebook.com/masasonfoundation/"><img src="img/icons/facebookIcon.png" class="snsIcons" style="margin-left: 50%;"></a>
+					<p class='snsIconText'>孫正義育英財団公式アカウント</p>
+					<a target="_blank" href="https://twitter.com/Masason_birdmen"><img src="img/icons/twitterIcon.png" class="snsIcons"></a>
+					<p class='snsIconText'>チームアカウント</p>
+			</div> -->
+
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

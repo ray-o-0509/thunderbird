@@ -1,0 +1,253 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>孫正義育英財団 Thunderbirds</title>
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/blog.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
+	<link rel="icon" href="img/fabicon.ico">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript">
+		let blogData = [];
+	  var spData = null;
+	  function doData(json) {
+	      spData = json.feed.entry;
+	  }
+
+	  function drawCell(tr, val) {
+	      var td = $("<td/>");
+	      tr.append(td);
+	      td.append(val);
+	      return td;
+	  }
+	  function drawRow(table, rowData) {
+		  if (rowData == null) return null;
+		  if (rowData.length == 0) return null;
+		  var tr = $("<tr/>");
+		  table.append(tr);
+		  for(var c=0; c<rowData.length; c++) {
+			  drawCell(tr, rowData[c]);
+		  }
+		  return tr;
+	  }
+
+	  function drawTable(parent) {
+		  var table = $("<table/>");
+		  parent.append(table);
+		  return table;
+	  }
+	  function readData(parent) {
+	      var data = spData;
+				let arrayNo = 33;
+				while (data[arrayNo]['content']['$t'] != "FALSE") {
+					blogData.push([
+						data[(arrayNo - 14)]['content']['$t'].replace('/','月') + '日',//日付
+						data[(arrayNo - 13)]['content']['$t'],//タイトル
+						data[(arrayNo - 12)]['content']['$t'].replace(/\r?\n/g, '<br>')
+																								 .replace(';Img0','<br><img src="' + data[(arrayNo - 11)]['content']['$t'] + '" style ="width: 90%;">')
+																								 .replace(';Img1','<br><img src="' + data[(arrayNo - 10)]['content']['$t'] + '" style ="width: 90%;">')
+																								 .replace(';Img2','<br><img src="' + data[(arrayNo - 9)]['content']['$t'] + '" style ="width: 90%;">')
+																								 .replace(';Img3','<br><img src="' + data[(arrayNo - 8)]['content']['$t'] + '" style ="width: 90%;">')
+																								 .replace(';Img4','<br><img src="' + data[(arrayNo - 7)]['content']['$t'] + '" style ="width: 90%;">')
+																								 .replace('--*', '<span>')
+																								 .replace('*--', '</span>')
+																								 .replace(';Video', '<br>' + data[(arrayNo - 6)]['content']['$t'])
+																								 .replace(';Video', '<br>' + data[(arrayNo - 5)]['content']['$t'])
+																								 .replace(';Video', '<br>' + data[(arrayNo - 4)]['content']['$t']),//本文
+						data[(arrayNo - 11)]['content']['$t'].replace('https://drive.google.com/open?id=', 'http://drive.google.com/uc?export=view&id='),//　表紙画像
+						data[(arrayNo - 10)]['content']['$t'].replace('https://drive.google.com/open?id=', 'http://drive.google.com/uc?export=view&id='),//画像1
+						data[(arrayNo - 9)]['content']['$t'].replace('https://drive.google.com/open?id=', 'http://drive.google.com/uc?export=view&id='),//画像2
+						data[(arrayNo - 8)]['content']['$t'].replace('https://drive.google.com/open?id=', 'http://drive.google.com/uc?export=view&id='),//画像3
+						data[(arrayNo - 7)]['content']['$t'].replace('https://drive.google.com/open?id=', 'http://drive.google.com/uc?export=view&id='),//画像4
+						data[(arrayNo - 6)]['content']['$t'],//動画１
+						data[(arrayNo - 5)]['content']['$t'],//動画２
+						data[(arrayNo - 4)]['content']['$t'],//動画３
+						data[(arrayNo - 3)]['content']['$t'],//書いた人
+						data[(arrayNo - 2)]['content']['$t'],//新着(Yes or No)
+						data[(arrayNo - 1)]['content']['$t']//タグ
+					]);
+					arrayNo+= 15;
+				}
+				console.log(blogData);
+				display();
+	      var table = drawTable(parent);
+	      var rowData = [];
+
+	      for(var r=0; r<data.length; r++) {
+	          var cell = data[r]["gs$cell"];
+	          var val = cell["$t"];
+	          if (cell.col == 1) {
+	              drawRow(table, rowData);
+								// console.log(rowData);
+	              rowData = [];
+	          }
+	          rowData.push(val);
+	      }
+	      drawRow(table, rowData);
+	  }
+	  $(document).ready(function(){
+	      readData($("#data"));
+	  });
+		function display(){
+			localStorage.setItem("blogData", JSON.stringify(blogData));
+			//パイロット/リスク管理/設計・電装/広報/大会関係
+			for (var i = 0; i < blogData.length; i++) {
+				if(blogData[i][13] === 'パイロット'){
+					$('#blogUl1').append('<li class="blogView" onclick="clickArticle(' + i + ')"><p class="viewBlogTitle" onclick="clickArticle(' + i + ')">' + blogData[i][1] + '</p><img src="' + blogData[i][3] + '" class="viewBlogPicture"><br><p class="viewBlogContents">' + blogData[i][2].substr(0,50) + '....</p><p class="blogTag" onclick="setTag(1)">#パイロット</p></li>');
+				}else if(blogData[i][13] === 'リスク管理'){
+						$('#blogUl2').append('<li class="blogView" onclick="clickArticle(' + i + ')"><p class="viewBlogTitle" onclick="clickArticle(' + i + ')">' + blogData[i][1] + '</p><img src="' + blogData[i][3] + '" class="viewBlogPicture"><br><p class="viewBlogContents">' + blogData[i][2].substr(0,50) + '....</p><p class="blogTag" onclick="setTag(2)">#リスク管理</p></li>');
+				}else if(blogData[i][13] === '設計・電装'){
+						$('#blogUl3').append('<li class="blogView" onclick="clickArticle(' + i + ')"><p class="viewBlogTitle" onclick="clickArticle(' + i + ')">' + blogData[i][1] + '</p><img src="' + blogData[i][3] + '" class="viewBlogPicture"><br><p class="viewBlogContents">' + blogData[i][2].substr(0,50) + '....</p><p class="blogTag" onclick="setTag(3)">#設計・電装</p></li>');
+				}else if(blogData[i][13] === '広報'){
+						$('#blogUl4').append('<li class="blogView" onclick="clickArticle(' + i + ')"><p class="viewBlogTitle" onclick="clickArticle(' + i + ')">' + blogData[i][1] + '</p><img src="' + blogData[i][3] + '" class="viewBlogPicture"><br><p class="viewBlogContents">' + blogData[i][2].substr(0,50) + '....</p><p class="blogTag" onclick="setTag(4)">#広報</p></li>');
+				}else if(blogData[i][13] === '大会関係'){
+						$('#blogUl5').append('<li class="blogView" onclick="clickArticle(' + i + ')"><p class="viewBlogTitle" onclick="clickArticle(' + i + ')">' + blogData[i][1] + '</p><img src="' + blogData[i][3] + '" class="viewBlogPicture"><br><p class="viewBlogContents">' + blogData[i][2].substr(0,50) + '....</p><p class="blogTag" onclick="setTag(5)">#大会関係</p></li>');
+				}
+				if(blogData[i][12] === 'Yes'){
+						$('#blogUl0').append('<li class="blogView" onclick="clickArticle(' + i + ')"><p class="viewBlogTitle" onclick="clickArticle(' + i + ')">' + blogData[i][1] + '</p><img src="' + blogData[i][3] + '" class="viewBlogPicture"><br><p class="viewBlogContents">' + blogData[i][2].substr(0,50) + '....</p><p class="blogTag">#新着<span class="blogTag" style="margin-left: 1%;">#' + blogData[i][13] + '</span></li>');
+
+				}
+			}
+		}
+	  </script>
+		<script src="https://spreadsheets.google.com/feeds/cells/1U6wKDFLuuRR7P5EQ4VcfIZemfWF0ALSzyyoGfHnYZdc/1/public/values?alt=json-in-script&callback=doData"></script>
+</head>
+<body id="blogBody" onload="setCheck()">
+		<!-- <script type="text/javascript">
+			if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+			}else{
+				// PC用のページにリダイレクトする
+				location.href = 'https://o-ray.github.io/thunderbird/blog.html';
+			}
+		</script> -->
+		<img src="img/backPicture/blog.jpeg" class="titlePicture">
+		<!-- ↓↓↓メニュー↓↓↓ -->
+		<div id="menuButton" touchstart="menuTouch()">
+			<div class="menuBer" id="menuBer0" touchstart="menuTouch()"></div>
+			<div class="menuBer" id="menuBer1" touchstart="menuTouch()"></div>
+			<div class="menuBer" id="menuBer2" touchstart="menuTouch()"></div>
+		</div>
+		<div class="menuDiv">
+			<br><br><br><br>
+			<h1 style="color: #FF857A;font-size: 90px;padding: 0 0;/*上下の余白*/border-top: solid 7px #FF857A;/*上線*/border-bottom: solid 7px #FF857A;/*下線*/" class="menuMessage">メニュー</h1><br>
+			<br><hr><br>
+			<a href="index.html" class="menuMessage">トップ</a>
+			<br><hr><br>
+			<a href="team.html" class="menuMessage">チーム概要</a>
+			<br><hr><br>
+			<a class="menuMessage" style='font-size: 50px;'>機体データ</a>
+			<p style="color: white;font-size: 30px;">COMING SOON</p>
+			<br><hr><br>
+			<a href="blog.html" class="menuMessage">ブログ</a>
+			<br><hr><br>
+			<a class="menuMessage" onclick="outlineScroll()">問い合わせ</a>
+			<br><hr><br>
+		</div>
+	<!-- ↑↑↑メニュー↑↑↑ -->
+		<section class="blogSecion">
+			<div id="data" style="display:none;"/></div>
+			<br><br>
+			<p class="blog-beta-content">ブログを通して、チームの紹介や機体の情報を随時発信しております。<br> ぜひ、ご一読いただき私たちの軌跡をお楽しみください。<br><br>タグ#を選択すると該当の記事の一覧がご覧いただけます。<br><br>公益財団法人 孫正義育英財団が運営する公式サイトではありません。孫正義育英財団生個人の取り組みとして、財団生が運営するサイトです。</p>
+			<br><br>
+			<div style="margin-top: 5%;overflow: hidden;">
+				<div class="select-box">
+          <label for="select-box1" class="label select-box1">
+              <span class="label-desc">カテゴリーを選択</span>
+          </label>
+          <select id="select-box1" class="select" name='alphabet'>
+              <option value="Choice 1">新着</option>
+              <option value="Choice 2">パイロット</option>
+              <option value="Choice 4">設計</option>
+              <option value="Choice 5">事務</option>
+              <option value="Choice 6">スケジュール</option>
+          </select>
+        </div>
+				<ul style="margin-bottom: 30%;" id='blogUl0'></ul>
+				<ul style="margin-bottom: 30%;" id='blogUl1'></ul>
+				<ul style="margin-bottom: 30%;" id='blogUl2'></ul>
+				<ul style="margin-bottom: 30%;" id='blogUl3'></ul>
+				<ul style="margin-bottom: 30%;" id='blogUl4'></ul>
+				<ul style="margin-bottom: 30%;" id='blogUl5'></ul>
+			</div>
+			<div class="outline_back_line"></div>
+		</section>
+
+
+		<div class="outline_back">
+			<div style="text-align: left;position: absolute;left: 0px;top: 120px;transform: skew(0deg, 5deg);width: 100%;height: 300px;">
+				<p class="outlineTitleJapanese">お問い合わせ</p><br>
+				<p class="outlineContents">Email:  info@masason-thunderbirds.org<br>本プロジェクトに関するお問い合わせ、取材のご依頼、応援メッセージなどは上記のメールアドレスまでご連絡ください。<br>数日以内に担当者が確認の上、ご返答差し上げます。<br><br><br>公益財団法人 孫正義育英財団が運営する公式サイトではありません。孫正義育英財団生個人の取り組みとして、財団生が運営するサイトです。</p><br>
+				<a target="_blank" href="https://www.facebook.com/masasonfoundation/"><img src="img/icons/facebookIcon.png" class="snsIcons" style="margin-left: 50%;"></a>
+				<p class='snsIconText'>孫正義育英財団公式アカウント</p>
+				<a target="_blank" href="https://twitter.com/Masason_birdmen"><img src="img/icons/twitterIcon.png" class="snsIcons"></a>
+				<p class='snsIconText'>チームアカウント</p>
+			</div>
+		</div>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/blog.js"></script>
+</body>
+</html>
+
+
+
+<!-- <script type="text/javascript">
+  var spData = null;
+  function doData(json) {
+      spData = json.feed.entry;
+  }
+
+  function drawCell(tr, val) {
+      var td = $("<td/>");
+      tr.append(td);
+      td.append(val);
+      return td;
+  }
+  function drawRow(table, rowData) {
+	  if (rowData == null) return null;
+	  if (rowData.length == 0) return null;
+	  var tr = $("<tr/>");
+	  table.append(tr);
+	  for(var c=0; c<rowData.length; c++) {
+		  drawCell(tr, rowData[c]);
+	  }
+	  return tr;
+  }
+
+  function drawTable(parent) {
+	  var table = $("<table/>");
+	  parent.append(table);
+	  return table;
+  }
+
+  function readData(parent) {
+      var data = spData;
+			for (var i = 19; i < 33; i++) {
+				console.log(data[i]['content']['$t']);
+			}
+
+      var table = drawTable(parent);
+      var rowData = [];
+
+      for(var r=0; r<data.length; r++) {
+          var cell = data[r]["gs$cell"];
+          var val = cell["$t"];
+          if (cell.col == 1) {
+              drawRow(table, rowData);
+							// console.log(rowData);
+              rowData = [];
+          }
+          rowData.push(val);
+      }
+      drawRow(table, rowData);
+  }
+  $(document).ready(function(){
+      readData($("#data"));
+  });
+  </script>
+<script src="https://spreadsheets.google.com/feeds/cells/1U6wKDFLuuRR7P5EQ4VcfIZemfWF0ALSzyyoGfHnYZdc/1/public/values?alt=json-in-script&callback=doData"></script> -->
+<!-- </head>
+<body>
+<div id="data" style="display:none;"/>
+</body>
+</html> -->
